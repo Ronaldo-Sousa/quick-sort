@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+// Função auxiliar para imprimir o vetor
+void imprimirVetor(int vetor[], int tamanho) {
+    for (int i = 0; i < tamanho; i++){
+        printf("%d|", vetor[i]);
+    }    
+}
+
+// Função para trocar dois elementos
+void trocar(int* a, int* b) {
+    int aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
+// Função de partição: coloca o pivô na posição correta
+int particionar(int vetor[], int baixo, int alto) {
+    int pivo = vetor[alto]; // Escolhe o último elemento como pivô
+    int i = (baixo - 1); // Índice do menor elemento
+
+    for (int j = baixo; j <= alto - 1; j++) {
+        // Se o elemento atual for menor que o pivô
+        if (vetor[j] < pivo) {
+            i++;
+            trocar(&vetor[i], &vetor[j]);
+        }
+    }
+    trocar(&vetor[i + 1], &vetor[alto]);
+    return (i + 1);
+}
+
+// Função principal do Quick Sort
+void quickSort(int vetor[], int baixo, int alto) {
+    if (baixo < alto) {
+        // pi é o índice de partição, arr[pi] está no lugar certo
+        int pi = particionar(vetor, baixo, alto);
+
+        // Ordena recursivamente os elementos antes e depois da partição
+        quickSort(vetor, baixo, pi - 1);
+        quickSort(vetor, pi + 1, alto);
+    }
+}
+
+int main() {
+    int vetor[] = {50, 70, 30, 40, 20, 80, 5, 60, 90, 10};
+    int tamanho = sizeof(vetor) / sizeof(vetor[0]);
+    quickSort(vetor, 0, tamanho - 1);
+    imprimirVetor(vetor, tamanho);
+    return 0;
+}
