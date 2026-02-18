@@ -33,7 +33,7 @@ int particionar(int vetor[], int baixo, int alto) {
 // Função principal do Quick Sort
 void quickSort(int vetor[], int baixo, int alto) {
     if (baixo < alto) {
-        // pi é o índice de partição, arr[pi] está no lugar certo
+        // pi é o índice de partição, vetor[pi] está no lugar certo
         int pi = particionar(vetor, baixo, alto);
 
         // Ordena recursivamente os elementos antes e depois da partição
